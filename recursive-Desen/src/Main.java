@@ -1,24 +1,33 @@
 import java.util.Scanner;
 
 public class Main {
-    static void desen(int number, int tempNumber, int direction) {
-        System.out.print(tempNumber + " ");
-        if (direction == 1 && tempNumber == number) {
-            return;
+    static void desen(int number,int tempNumber,boolean durum) {
+        System.out.println("Güncel sayımız : " + number);
+        if (number > 0 && durum) {
+            number -= 5;
+            System.out.println(number);
+            desen(number,tempNumber,true);
         }
-        if (tempNumber <= 0) {
-            direction = 1;
+        else if (number <= 0) {
+            number += 5;
+            System.out.println(number);
+            desen(number,tempNumber,false);
+
+        }else if (number > 0 && !durum && number != tempNumber ){
+            number+=5;
+            System.out.println(number);
+            desen(number,tempNumber,false);
+
         }
-        desen(number, tempNumber + (5 * direction), direction);
     }
+
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         System.out.print("Bir sayı giriniz: ");
         int number = scanner.nextInt();
+        boolean durum = true;
+        desen(number,number,durum);
 
-        if (number > 0)
-            desen(number, number, -1);
-        else
-            System.out.println("Lütfen pozitif sayı giriniz.");
+
     }
 }
